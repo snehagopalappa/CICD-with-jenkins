@@ -84,8 +84,25 @@ pipeline {
     post {
         always {
             echo 'Pipeline finished.'
-            // You can add email notifications or logging here
-            // this is just to test
+            
+        }
+
+        success {
+            emailext (
+                to: 'snehajenkins@gmail.com', 
+                subject: "Build Successful: ${currentBuild.fullDisplayName}",
+                body: "The build was successful.\n\nCheck console output at: ${env.BUILD_URL}",
+                attachLog: true
+            )
+        }
+        
+        failure {
+            emailext (
+                to: 'snehajenkins@gmail.com', 
+                subject: "Build Failed: ${currentBuild.fullDisplayName}",
+                body: "The build has failed.\n\nCheck console output at: ${env.BUILD_URL}",
+                attachLog: true
+            )
         }
     }
 }
