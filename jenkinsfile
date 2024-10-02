@@ -12,14 +12,6 @@ pipeline {
             }
         }
 
-        stage('test'){
-            steps {
-                script{
-                    echo'test'
-                }
-            }
-        }
-        
         stage('Unit and Integration Tests') {
             steps {
                 script {
@@ -84,7 +76,6 @@ pipeline {
     post {
         always {
             echo 'Pipeline finished.'
-            
         }
 
         success {
